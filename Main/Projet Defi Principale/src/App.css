@@ -1,82 +1,57 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-@keyframes waves {
-  0% { background-position: 0 0, 0 0; }
-  100% { background-position: 1000px 0, -1000px 0; }
-}
-
-
-body {
+/* Global styles */
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+  height: 100vh;
+}
+.container {
+  position: relative;
+  height: auto; /* Permet au conteneur de s'adapter à la hauteur totale du contenu */
+  text-align: center;
+  padding-bottom: 50px; /* Ajout d'un padding pour éviter le "collage" au bas */
+}
+/* Pour faire en sorte que le site occupe toute la largeur et hauteur de l'écran */
 #root {
-  min-height: 300vh;
-  width: 100vw; /* Toujours la largeur de l'écran */
+  min-height:500vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
+  background: linear-gradient(to bottom, #1e90ff, #010305);
   padding: 20px;
+  transition:background 0.2s ease;
   color: white;
-  transition: background 0.2s ease;
-  position: relative; /* Pour positionner les poissons */
-}
-.fish {
-  position: absolute;
-  width: 50px;
-  height: 20px;
-  background: orange;
-  border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; /* Forme arrondie */
-  animation: swim 10s infinite linear;
-  z-index: 1;
+  
 }
 
-/* Différentes tailles pour les poissons */
+/* Texte d'introduction */
+h1 {
+  font-size: 4vw; /* Taille dynamique basée sur la largeur de l'écran */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 2vw;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Poissons (animation) */
+.fish {
+  position: absolute;
+  background: orange;
+  border-radius: 50%;
+  animation: swim 10s infinite linear;
+}
+
 .fish.small {
   width: 30px;
   height: 15px;
@@ -87,7 +62,6 @@ body {
   height: 40px;
 }
 
-/* Animation pour faire nager les poissons */
 @keyframes swim {
   from {
     transform: translateX(-100%);
@@ -97,25 +71,43 @@ body {
   }
 }
 
-/* Variation pour des animations à différentes vitesses */
+/* Poissons à différentes positions */
 .fish:nth-child(1) {
   top: 20%;
-  animation-duration: 8s;
+  left: 10%;
 }
 
 .fish:nth-child(2) {
   top: 40%;
-  animation-duration: 12s;
+  left: 30%;
 }
 
 .fish:nth-child(3) {
   top: 60%;
-  animation-duration: 15s;
+  left: 50%;
 }
 
 .fish:nth-child(4) {
   top: 80%;
-  animation-duration: 10s;
+  left: 70%;
 }
 
+/* Responsiveness: pour les petits écrans, les poissons sont plus petits */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 6vw;
+  }
+  p {
+    font-size: 3vw;
+  }
+  
+  .fish.small {
+    width: 20px;
+    height: 10px;
+  }
 
+  .fish.large {
+    width: 60px;
+    height: 30px;
+  }
+}
