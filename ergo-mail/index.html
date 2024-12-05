@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+</head>
+<body>
+    <form action="#" method="post">
+        <!-- Première ligne : Zone de texte pour l'email -->
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <!-- Deuxième ligne : Zone de texte pour le mot de passe + bouton Vérifier -->
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+            <button type="button" id="verifier" onclick="verifier()">Vérifier</button>
+        </div>
+        
+        <!-- Troisième ligne : Zone de texte pour la confirmation du mot de passe + bouton Vérifier 2 -->
+        <div>
+            <label for="conf_password">Confirmer mot de passe :</label>
+            <input type="password" id="conf_password" name="conf_password" required>
+            <button type="button" id="verifier2" onclick="verifier()">Vérifier</button>
+        </div>
+        
+        <!-- Quatrième ligne : Boutons "Ok" et "Annuler" -->
+        <div>
+            <button type="submit">Ok</button>
+            <button type="reset">Annuler</button>
+        </div>
+    </form>
+
+    <script>
+        function verifier() {
+            alert("Mot de passe vérifié !");
+        }
+    </script>
+</body>
+</html>
