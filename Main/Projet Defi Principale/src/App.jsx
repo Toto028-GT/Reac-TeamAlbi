@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import WaveBanner from './WaveBanner';
 
 function App() {
   const [backgroundColor, setBackgroundColor] = useState('#1E90FF');
@@ -49,6 +50,7 @@ function App() {
         background: `linear-gradient(to bottom, #1E90FF, ${backgroundColor})`,
       }}
     >
+      <WaveBanner /> {/* Ajout du composant ici */}
       <h1>Plongée dans les abysses</h1>
       <p>Plus vous descendez, plus il fait sombre...</p>
       {generateFish()} {/* Génération des poissons */}
