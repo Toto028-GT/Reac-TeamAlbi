@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA à 3 glisser-déposer avec images PNG</title>
+    <style>
+        /* Ajouter une grande image de fond sur le body */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-image: url('image/fond.jpg'); /* Image de fond */
+            background-size: cover; /* Pour que l'image couvre toute la surface */
+            background-position: center; /* Centrer l'image de fond */
+            background-attachment: fixed; /* L'image de fond reste fixe quand on fait défiler la page */
+            min-height: 100vh; /* Assure que la page occupe tout l'écran */
+        }
+
+        .captcha-container {
+            display: inline-block;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8); /* Fond légèrement transparent pour une meilleure visibilité */
+        }
+
+        /* Conteneur pour aligner les éléments sur la même ligne */
+        .elements-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Espacement entre les éléments */
+        }
+
+        .dropzone {
+            width: 150px;
+            height: 150px;
+            margin: 20px;
+            display: inline-block;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .draggable {
+            width: 100px;
+            height: 100px;
+            cursor: grab;
+        }
+
+        .dropzone.valid {
+            border-color: #4CAF50;
+        }
+
+        .success-message {
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="captcha-container">
+        <h2>Êtes-vous un humain ?</h2>
+        <p>Glissez chaque image dans sa zone correspondante pour valider automatiquement.</p>
+
+        <!-- Conteneur pour les images et les zones alignées horizontalement -->
+        <div class="elements-container">
+            <!-- Drag Elements -->
+            <div class="draggable" id="draggable1" draggable="true">
+                <img src="image/image1.png" alt="Image 1" width="100" height="100">
+            </div>
+            <div class="draggable" id="draggable2" draggable="true">
+                <img src="image/image2.png" alt="Image 2" width="100" height="100">
+            </div>
+            <div class="draggable" id="draggable3" draggable="true">
+                <img src="image/image3.png" alt="Image 3" width="100" height="100">
+            </div>
+        </div>
+
+        <!-- Drop Zones -->
+        <div class="elements-container">
+            <div class="dropzone" id="dropzone1" style="background-image: url('image/zone1.png');"></div>
+            <div class="dropzone" id="dropzone2" style="background-image: url('image/zone2.png');"></div>
+            <div class="dropzone" id="dropzone3" style="background-image: url('image/zone3.png');"></div>
+        </div>
+
+        <p id="successMessage" class="success-message">CAPTCHA validé ! Vous pouvez continuer.</p>
+    </div>
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+        const dropzones = document.querySelectorAll('.dropzone');
+        const successMessage = document.getElementById('successMessage');
+        const dropState = { 1: false, 2: false, 3: false }; // Suivi des états des zones
+
+        draggables.forEach((draggable, index) => {
+            draggable.addEventListener('dragstart', (event) => {
+                event.dataTransfer.setData('text', draggable.id); // Enregistre l'ID de l'élément
+            });
+        });
+
+        dropzones.forEach((dropzone, index) => {
+            dropzone.addEventListener('dragover', (event) => {
+                event.preventDefault(); // Permet de déposer
+                dropzone.classList.add('valid');
+            });
+
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('valid');
+            });
+
+            dropzone.addEventListener('drop', (event) => {
+                event.preventDefault();
+                const draggableId = event.dataTransfer.getData('text');
+                const expectedId = `draggable${index + 1}`; // ID attendu (draggable1, draggable2, etc.)
+                
+                if (draggableId === expectedId) {
+                    // Changer le fond de la zone de dépôt après un dépôt correct
+                    dropzone.style.backgroundImage = `url('image/success-zone${index + 1}.png')`; // Image de succès
+                    dropState[index + 1] = true; // Marque cette zone comme validée
+                    document.getElementById(draggableId).style.display = 'none'; // Masquer l'élément déplacé
+                } else {
+                    alert("Mauvaise zone ! Essayez de nouveau.");
+                }
+
+                // Valider automatiquement si toutes les zones sont correctes
+                if (Object.values(dropState).every(state => state)) {
+                    successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = 'page2.html'; // Page protégée
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
