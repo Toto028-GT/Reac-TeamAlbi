@@ -4,8 +4,8 @@ const BlocPleinEcran = () =>
 {
   return (
     <div style={{
-      position: 'fixed', top: 0, left: 0, width: '100%', height: '60%', borderBottomLeftRadius: '45px', borderBottomRightRadius: '45px', backgroundColor: '#4CAF50', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        
+      position: 'fixed', top: 0, left: 0, width: '100%', height: '75%', borderBottomLeftRadius: '45px', borderBottomRightRadius: '45px', backgroundColor: '#4CAF50', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+
       <BlocGlobalGauche />
       <BlocGlobalDroit />
     </div>
@@ -16,9 +16,8 @@ const BlocGlobalGauche = () =>
 {
   return (
     <div style={{
-      position: 'fixed', top : 10, left : 10, width: '49%', height: '50%', borderRadius: '40px', backgroundColor: '#00C8F0', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      <h1>Bloc en haut de la page</h1>
-      <p>Ce bloc prend toute la largeur de la fenêtre.</p>
+      position: 'fixed', top : 10, left : 10, width: '49%', height: '60%', borderRadius: '40px', backgroundColor: '#00C8F0', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <img src="https://via.placeholder.com/150" alt="Exemple d'image" />
     </div>
   )
 }
@@ -27,22 +26,24 @@ const BlocGlobalDroit = () =>
   {
     return (
       <div style={{
-        position: 'fixed', top : 10, right : 10, width: '49%', height: '50%', borderRadius: '40px', backgroundColor: '#00C8F0', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <h1>Bloc en haut de la page</h1>
-        <p>Ce bloc prend toute la largeur de la fenêtre.</p>
+        position: 'fixed', top : 10, right : 10, width: '49%', height: '60%', borderRadius: '40px', backgroundColor: '#00C8F0', color: 'white', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       </div>
     )
   }
 
-
 const BlocsMeteoJour = () => 
 {
   return (
-    <div style={{ textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#00C8F0' }}>
+    <div style={{display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#00C8F0' }}>
       <p>Voici le premier texte de votre bloc.</p>
       <img src="https://via.placeholder.com/150" alt="Exemple d'image" />
       <p>Voici le second texte du bloc, après l'image.</p>
     </div>
+
+    
   );
 };
 
@@ -54,6 +55,7 @@ const App = () =>
       display: 'flex',
       position: 'fixed',
       flexDirection: 'column',
+      zIndex : 0
     }}>
       <BlocPleinEcran />
 
@@ -61,8 +63,8 @@ const App = () =>
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
-      position: 'fixed',
-      alignItems: 'flex-start'
+      alignItems: 'flex-start',
+      zIndex : 1
     }}>
       <BlocsMeteoJour />
       <BlocsMeteoJour />
