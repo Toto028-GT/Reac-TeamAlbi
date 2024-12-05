@@ -47,25 +47,25 @@
 
 
 body {
-  margin: 0; /* Supprime les marges par défaut */
-  padding: 0; /* Supprime les espaces */
-  width: 100vw; /* Occupe toute la largeur de la fenêtre */
-  height: 100vh; /* Occupe toute la hauteur */
-  overflow: hidden; /* Empêche les barres de défilement */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 #root {
-  width: 100vw; /* Largeur complète */
-  height: 100vh; /* Hauteur complète */
-  background: linear-gradient(to bottom, #1E90FF, #12263A); /* Dégradé */
-  position: relative; /* Nécessaire pour les poissons */
-  overflow: hidden;
+  min-height: 300vh;
+  width: 100vw; /* Toujours la largeur de l'écran */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  padding: 20px;
+  color: white;
+  transition: background 0.2s ease;
+  position: relative; /* Pour positionner les poissons */
 }
-
 .fish {
   position: absolute;
   width: 50px;

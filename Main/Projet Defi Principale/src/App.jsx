@@ -52,7 +52,7 @@ function App() {
       <h1>Plongée dans les abysses</h1>
       <p>Plus vous descendez, plus il fait sombre...</p>
       {generateFish()} {/* Génération des poissons */}
-      <div style={{ height: '100vh' }} /> {/* Espace pour scroller */}
+      <div style={{ height: '200vh' }} /> {/* Espace pour scroller */}
     </div>
   );
 }
