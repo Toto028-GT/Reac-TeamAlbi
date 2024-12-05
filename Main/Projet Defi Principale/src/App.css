@@ -40,3 +40,82 @@
 .read-the-docs {
   color: #888;
 }
+@keyframes waves {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 1000px 0, -1000px 0; }
+}
+
+
+body {
+  margin: 0; /* Supprime les marges par défaut */
+  padding: 0; /* Supprime les espaces */
+  width: 100vw; /* Occupe toute la largeur de la fenêtre */
+  height: 100vh; /* Occupe toute la hauteur */
+  overflow: hidden; /* Empêche les barres de défilement */
+}
+
+#root {
+  width: 100vw; /* Largeur complète */
+  height: 100vh; /* Hauteur complète */
+  background: linear-gradient(to bottom, #1E90FF, #12263A); /* Dégradé */
+  position: relative; /* Nécessaire pour les poissons */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.fish {
+  position: absolute;
+  width: 50px;
+  height: 20px;
+  background: orange;
+  border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; /* Forme arrondie */
+  animation: swim 10s infinite linear;
+  z-index: 1;
+}
+
+/* Différentes tailles pour les poissons */
+.fish.small {
+  width: 30px;
+  height: 15px;
+}
+
+.fish.large {
+  width: 80px;
+  height: 40px;
+}
+
+/* Animation pour faire nager les poissons */
+@keyframes swim {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(110%);
+  }
+}
+
+/* Variation pour des animations à différentes vitesses */
+.fish:nth-child(1) {
+  top: 20%;
+  animation-duration: 8s;
+}
+
+.fish:nth-child(2) {
+  top: 40%;
+  animation-duration: 12s;
+}
+
+.fish:nth-child(3) {
+  top: 60%;
+  animation-duration: 15s;
+}
+
+.fish:nth-child(4) {
+  top: 80%;
+  animation-duration: 10s;
+}
+
+
