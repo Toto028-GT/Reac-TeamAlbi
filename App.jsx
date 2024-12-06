@@ -61,7 +61,7 @@ const App = () => {
                 justifyContent: 'center',
                 alignItems: 'flex-end',
                 gap: '50px',
-                marginBottom: '8px'
+                marginBottom: '30px'
             }}>
                 {Array(7).fill(null).map((_, index) => (
                     <BlocsMeteo
@@ -84,7 +84,7 @@ const BlocGlobalGauche = ({ weatherData }) => {
             width: '49%',
             height: '60%',
             borderRadius: '40px',
-            backgroundColor: '#4A67BF',
+            background: 'linear-gradient(to bottom, #4A67BF, #294392)',
             color: 'white',
             display: 'flex',
             flexDirection: 'column',
@@ -111,12 +111,12 @@ const BlocGlobalDroit = ({ handleSearch, cities, handleCityClick }) => {
             width: '49%',
             height: '60%',
             borderRadius: '40px',
-            backgroundColor: '#4A67BF',
+            background: 'linear-gradient(to bottom, #4A67BF, #294392)',
             color: 'white',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
+            justifyContent: 'flex-start',
+            alignItems: 'center',
         }}>
             <input
                 type="text"
@@ -126,6 +126,7 @@ const BlocGlobalDroit = ({ handleSearch, cities, handleCityClick }) => {
                     width: '80%',
                     padding: '10px',
                     fontSize: '16px',
+                    marginTop: '50px',
                     marginBottom: '20px'
                 }}
             />
@@ -177,7 +178,7 @@ const BlocsMeteo = ({ weatherData, index }) => {
             paddingRight : '40px',
             border: '3px solid #000000',
             borderRadius: '30px' ,
-            backgroundColor : '#7D9BBF'
+            backgroundColor : '#5F80E3'
         }}>
             <p>JOUR {index + 1}</p>
             <img
