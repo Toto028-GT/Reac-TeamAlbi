@@ -152,7 +152,7 @@ function handleHein() {
 }
 
 function handleSuivant() {
-    window.location.href = "https://youtu.be/xvFZjo5PgG0?si=36zwHB8szJGB1umh";
+    window.location.href = "http://reacteam.naflows.com/";
 }
 
 function updateBoutonVerif2() {
