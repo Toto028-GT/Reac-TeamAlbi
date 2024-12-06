@@ -6,7 +6,7 @@ function togglePasswordVisibility() {
     passwordField.type = isPasswordVisible ? "text" : "password";
 }
 
-const conditions = {
+let conditions = {
     lowercase: { count: 5, consecutive: false },
     uppercase: { count: 6, unique: true },
     digits: { count: 5, unique: true }
@@ -36,23 +36,24 @@ function validatePassword() {
 
     const hasEnoughDigits = digitsMatches.length >= conditions.digits.count;
     const hasUniqueDigits = conditions.digits.unique ? new Set(digitsMatches).size >= conditions.digits.count : true;
-
+	
+	console.log(conditions)
     if (hasEnoughLowercase && hasUniqueLowercase && hasEnoughUppercase && hasUniqueUppercase && hasEnoughDigits && hasUniqueDigits) {
         successfulValidations++;
         if (successfulValidations === 1) {
             messageElement.textContent = "Veuillez bien lire les critères de mot de passe !";
             messageElement.style.color = "red";
             conditions = {
-                lowercase: { count: getRandomInt(3, 15), consecutive: false },
-                uppercase: { count: getRandomInt(3, 15), unique: true },
+                lowercase: { count: getRandomInt(3, 13), consecutive: false },
+                uppercase: { count: getRandomInt(3, 13), unique: true },
                 digits: { count: getRandomInt(3, 10), unique: true }
             };
         } else if (successfulValidations === 2) {
             messageElement.textContent = "Ça devient long, veuillez vraiment bien lire les conditions !";
             messageElement.style.color = "red";
             conditions = {
-                lowercase: { count: getRandomInt(5, 10), consecutive: false },
-                uppercase: { count: getRandomInt(5, 10), unique: true },
+                lowercase: { count: getRandomInt(5, 13), consecutive: false },
+                uppercase: { count: getRandomInt(5, 13), unique: true },
                 digits: { count: getRandomInt(5, 10), unique: true }
             };
         } else {
@@ -67,6 +68,9 @@ function validatePassword() {
         messageElement.style.color = "red";
     }
 }
+function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
 function validatePasswordConfirmation() {
     const password = document.getElementById("password").value;
