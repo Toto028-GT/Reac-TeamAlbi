@@ -4,9 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
+    <style>
+        /* Style pour la pop-up */
+        #popup {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border: 2px solid black;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Overlay pour le fond sombre */
+        #overlay {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
 </head>
 <body>
-    <form action="#" method="post">
+    <form id="myForm" action="#" method="post">
         <!-- Première ligne : Zone de texte pour l'email -->
         <div>
             <label for="email">Email :</label>
@@ -17,27 +45,131 @@
         <div>
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="password" required>
-            <button type="button" id="verifier" onclick="verifier()">Vérifier</button>
+            <button type="button" id="verifierBtn" onclick="updateVerifier()">Vérifier</button>
         </div>
         
         <!-- Troisième ligne : Zone de texte pour la confirmation du mot de passe + bouton Vérifier 2 -->
         <div>
             <label for="conf_password">Confirmer mot de passe :</label>
             <input type="password" id="conf_password" name="conf_password" required>
-            <button type="button" id="verifier2" onclick="verifier()">Vérifier</button>
+            <button type="button" id="verifier2Btn" onclick="updateVerifier()">Vérifier</button>
         </div>
         
         <!-- Quatrième ligne : Boutons "Ok" et "Annuler" -->
         <div>
-            <button type="submit">Ok</button>
+            <button type="submit">Valider</button>
             <button type="reset">Annuler</button>
         </div>
     </form>
 
+    <!-- Pop-up et overlay -->
+    <div id="overlay" onclick="hidePopup()"></div>
+    <div id="popup">
+        <p id="popupMessage"></p>
+        <button id="popupYes" style="display:none;" onclick="handleYes()">Oui</button>
+        <button id="popupNo" style="display:none;" onclick="handleNo()">Non</button>
+        <button id="popupOk" style="display:none;" onclick="handleOk()">Ok</button>
+    </div>
+
     <script>
-        function verifier() {
-            alert("Mot de passe vérifié !");
+        // Variables avec des valeurs initiales
+        let verifier = 1; // Exemple de valeur initiale
+        let verifier2 = 0;
+        let popupState = 0; // Gère la séquence des pop-ups
+
+        // Fonction pour gérer la validation
+        function verifierFunction(event) {
+            if (verifier === 0 || (verifier === 1 && verifier2 === 0)) {
+                event.preventDefault();
+                if (verifier === 0) {
+                    showPopup("Mot de passe invalide. Cliquez sur \"Vérifier\" pour corriger.");
+                } else if (verifier === 1 && verifier2 === 0) {
+                    // Début de la séquence des pop-ups
+                    popupState = 1;
+                    showPopup("Êtes-vous sûr de vouloir vous inscrire ?", true);
+                }
+            } else {
+                showPopup("Formulaire envoyé avec succès !");
+            }
         }
+
+        // Afficher la pop-up
+        function showPopup(message, showYesNo = false, showOk = false) {
+            const popup = document.getElementById("popup");
+            const overlay = document.getElementById("overlay");
+            const popupMessage = document.getElementById("popupMessage");
+            const popupYes = document.getElementById("popupYes");
+            const popupNo = document.getElementById("popupNo");
+            const popupOk = document.getElementById("popupOk");
+
+            popupMessage.innerText = message;
+
+            // Gère les boutons affichés
+            popupYes.style.display = showYesNo ? "inline-block" : "none";
+            popupNo.style.display = showYesNo ? "inline-block" : "none";
+            popupOk.style.display = showOk ? "inline-block" : "none";
+
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        }
+
+        // Fermer la pop-up
+        function hidePopup() {
+            const popup = document.getElementById("popup");
+            const overlay = document.getElementById("overlay");
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        }
+
+        // Gestion des réponses Oui et Non
+        function handleYes() {
+            if (popupState === 1) {
+                popupState = 2;
+                showPopup("Êtes-vous vraiment sûr ?", true);
+            } else if (popupState === 2) {
+                popupState = 3;
+                showPopup("Voulez-vous tout recommencer ?", true);
+            } else if (popupState === 3) {
+                // Action de tout recommencer
+                location.reload();
+            }
+        }
+
+        function handleNo() {
+            if (popupState === 3) {
+                popupState = 4;
+                showPopup("Veuillez confirmer votre mot de passe.", false, true);
+            } else {
+                hidePopup();
+            }
+        }
+
+        // Gestion du bouton OK
+        function handleOk() {
+            if (popupState === 4) {
+                verifier2 = 1; // Met à jour verifier2
+                hidePopup();
+
+                // Sélection des boutons
+                const form = document.getElementById("myForm");
+                const submitButton = form.querySelector('button[type="submit"]');
+                const resetButton = form.querySelector('button[type="reset"]');
+
+                // Échanger leurs positions dans le DOM
+                const parent = submitButton.parentElement;
+                parent.insertBefore(resetButton, submitButton);
+
+                // Modifier les styles des boutons
+                resetButton.style.backgroundColor = "lightgreen";
+                submitButton.style.backgroundColor = "red";
+                submitButton.style.color = "white"; // Pour rendre le texte lisible
+            }
+        }
+
+
+        // Attacher l'événement de validation au formulaire
+        const form = document.getElementById("myForm");
+        form.addEventListener("submit", verifierFunction);
     </script>
 </body>
 </html>
