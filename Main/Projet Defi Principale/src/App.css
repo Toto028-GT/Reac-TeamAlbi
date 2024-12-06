@@ -1,140 +1,124 @@
-/* Global styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+#root {
+  max-width: auto;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
 }
 
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+@keyframes waves {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 1000px 0, -1000px 0; }
+}
+
+
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   font-family: Arial, sans-serif;
-  height: 100vh;
-  
+  overflow-x: hidden;
 }
-.container {
-  position: relative;
-  height: auto; /* Permet au conteneur de s'adapter à la hauteur totale du contenu */
-  text-align: center;
-  padding-bottom: 50px; /* Ajout d'un padding pour éviter le "collage" au bas */
-}
-/* Pour faire en sorte que le site occupe toute la largeur et hauteur de l'écran */
+
 #root {
-  min-height:500vh;
-  width: 100vw;
+  min-height: 300vh;
+  width: 100vw; /* Toujours la largeur de l'écran */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
-  background: linear-gradient(to bottom, #1e90ff, #010305);
-  padding: 20px;
-  transition:background 0.2s ease;
+  padding: 0px;
   color: white;
-  
+  transition: background 0.2s ease;
+  position: relative; /* Pour positionner les poissons */
 }
-
-/* Texte d'introduction */
-h1 {
-  font-size: 4vw; /* Taille dynamique basée sur la largeur de l'écran */
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 2vw;
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-/* Poissons (animation) */
 .fish {
   position: absolute;
+  width: 50px;
+  height: 20px;
   background: orange;
-  border-radius: 50%;
+  border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; /* Forme arrondie */
   animation: swim 10s infinite linear;
-  animation-duration: 10s;
+  z-index: 1;
 }
 
+/* Différentes tailles pour les poissons */
 .fish.small {
   width: 30px;
   height: 15px;
-  
 }
 
 .fish.large {
   width: 80px;
   height: 40px;
-  
 }
 
+/* Animation pour faire nager les poissons */
 @keyframes swim {
   from {
-    transform: translateX(0%);
+    transform: translateX(-100%);
   }
   to {
-    transform: translateX(400%);
+    transform: translateX(110%);
   }
 }
 
-/* Poissons à différentes positions */
+/* Variation pour des animations à différentes vitesses */
 .fish:nth-child(1) {
   top: 20%;
-  left: 10%;
+  animation-duration: 8s;
 }
 
 .fish:nth-child(2) {
   top: 40%;
-  left: 30%;
+  animation-duration: 12s;
 }
 
 .fish:nth-child(3) {
   top: 60%;
-  left: 50%;
+  animation-duration: 15s;
 }
 
 .fish:nth-child(4) {
   top: 80%;
-  left: 70%;
+  animation-duration: 10s;
 }
 
-/* Responsiveness: pour les petits écrans, les poissons sont plus petits */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 6vw;
-  }
-  p {
-    font-size: 3vw;
-  }
-  
-  .fish.small {
-    width: 20px;
-    height: 10px;
-  }
-
-  .fish.large {
-    width: 60px;
-    height: 30px;
-  }
-  
-}
-@media (max-width: 480px) {
-  h1 {
-    font-size: 7vw; /* Adapte encore plus pour les écrans très petits */
-  }
-
-  p {
-    font-size: 4vw;
-  }
-
-  .fish.small {
-    width: 15px;
-    height: 8px;
-  }
-
-  .fish.large {
-    width: 50px;
-    height: 25px;
-  }
-}
 /* WaveBanner.css */
 .wave-banner {
   position: relative;
@@ -167,6 +151,32 @@ p {
   animation-delay: 4s;
   opacity: 70%; 
 }
+.buttons-parent {
+  display: flex;
+  gap: 50px;
+}
+.round-button {
+  width: 60px;
+  height: 60px;
+  background-color: #07490c;
+  border: none;
+  border-radius: 50%; /* Rend le bouton rond */
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.round-button:hover {
+  background-color: #086e16;
+  transform: scale(1.1); /* Zoom léger */
+}
+
 
 
 @keyframes wave-animation {
@@ -177,5 +187,8 @@ p {
     transform: translateX(-50%);
   }
 }
+
+
+
 
 

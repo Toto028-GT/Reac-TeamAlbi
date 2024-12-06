@@ -10,6 +10,7 @@ function App() {
       const scrollPosition = window.scrollY;
       const maxScroll = document.body.scrollHeight - window.innerHeight;
 
+      // Calcul du niveau d'obscurité en fonction du scroll
       const percentage = Math.min(scrollPosition / maxScroll, 1);
       const red = Math.round(30 - 20 * percentage);
       const green = Math.round(60 - 40 * percentage);
@@ -21,15 +22,14 @@ function App() {
 
     window.addEventListener('scroll', handleScroll);
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const generateFish = () => {
     const fishes = [];
     for (let i = 0; i < 10; i++) {
       const size = Math.random() > 0.5 ? 'small' : 'large';
-      const top = Math.random() * 300; // Position verticale aléatoire
+      const top = Math.random() * 100; // Position verticale aléatoire
       const left = Math.random() * 100; // Position horizontale de départ
       fishes.push(
         <div
@@ -41,8 +41,9 @@ function App() {
     }
     return fishes;
   };
+  
+  // App.js
   return (
-    <body>
     <div
       id="root"
       style={{
@@ -52,12 +53,29 @@ function App() {
       <WaveBanner /> {/* Ajout du composant ici */}
       <h1>Plongée dans les abysses</h1>
       <p>Plus vous descendez, plus il fait sombre...</p>
+    
+      {generateFish()} {/* Génération des poissons */}
+      <div style={{ height: '200vh' }} /> {/* Espace pour scroller */}
+
       
+      <div className="buttons-parent" style={{
+        flexDirection: "column",
+        transform: 'rotate(45deg)'
+      }}>
+        <div className="buttons-parent" style={{
+          flexDirection: "row"
+        }}>
+          <button className="round-button">+</button>
+          <button className="round-button">+</button>
+        </div>
+        <div className="buttons-parent" style={{
+          flexDirection: "row"
+        }}>
+          <button className="round-button">+</button>
+          <button className="round-button">+</button>
+        </div>
+      </div>
     </div>
-    
-    {generateFish()}
-    </body>
-    
   );
 }
 
