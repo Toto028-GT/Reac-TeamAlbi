@@ -234,9 +234,19 @@
                 }
             });
 			dropzone.addEventListener('mouseover', (event) => {
-                
+                event.preventDefault();
+                const draggableId = event.dataTransfer.getData('text');
+                const expectedId = `draggable${index + 1}`; // ID attendu (draggable1, draggable2, etc.)
                 dropzone.style.backgroundImage = `url('image/success-zone${index + 1}.png')`;
-                
+                if (draggableId === expectedId) {
+                    // Changer le fond de la zone de dépôt après un dépôt correct
+                     // Image de succès
+                    dropState[index + 1] = true; // Marque cette zone comme validée
+                    document.getElementById(draggableId).style.display = 'none'; // Masquer l'élément déplacé
+                } else {
+                    alert("Mauvaise zone ! Essayez de nouveau.");
+                }
+
                 // Valider automatiquement si toutes les zones sont correctes
                 if (Object.values(dropState).every(state => state)) {
                     successMessage.style.display = 'block';
