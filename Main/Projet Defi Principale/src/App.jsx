@@ -24,7 +24,22 @@ function App() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
+  const generateFish = () => {
+    const fishes = [];
+    for (let i = 0; i < 10; i++) {
+      const size = Math.random() > 0.5 ? 'small' : 'large';
+      const top = Math.random() * 100; // Position verticale aléatoire
+      const left = Math.random() * 100; // Position horizontale de départ
+      fishes.push(
+        <div
+          key={i}
+          className={`fish ${size}`}
+          style={{ top: `${top}%`, left: `${left}%` }}
+        ></div>
+      );
+    }
+    return fishes;
+  };
   return (
     <body>
       <div className="container" >
@@ -33,10 +48,7 @@ function App() {
       <p>Plus vous descendez, plus il fait sombre...</p>
       
     </div>
-      <div className="fish small" style={{ left: '10%' }}></div>
-      <div className="fish large" style={{ left: '20%' }}></div>
-      <div className="fish" style={{ left: '30%' }}></div>
-      <div className="fish small" style={{ left: '50%' }}></div>
+    {generateFish()}
     </body>
     
   );
