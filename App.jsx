@@ -58,7 +58,7 @@ const App = () => {
                 height: '28vh',
                 display: 'flex',
                 flexDirection: 'row',
-                justifyContent: 'center',
+                justifyContent: 'space-evenly',
                 alignItems: 'center',
             }}>
                 {Array(7).fill(null).map((_, index) => (
