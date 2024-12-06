@@ -1,0 +1,29 @@
+.keyboard{
+    display: none;
+    grid-template-columns: repeat(10, 50px);
+    gap: 5px;
+    justify-content: left;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.qwerty-container {
+    display: grid;
+    grid-template-columns: repeat(10, 50px); /* Crée 10 colonnes de 50px chacune */
+    gap: 5px; /* Espace entre les éléments */
+    justify-content: left; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement */
+    margin-bottom: 20px;    
+}
+
+.qwerty-container span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
