@@ -14,82 +14,29 @@
         </div>
         
         <!-- Deuxième ligne : Zone de texte pour le mot de passe + bouton Vérifier -->
-        <div>
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" required>
-            <button type="button" id="verifier" onclick="verifier()">Vérifier</button>
-			<!--test1 -->
+        <div class="container">
+            <label for="password">Mot de passe : </label>
+            <input type="password" id="password" placeholder="Mot de passe">
+            <button type="button" class="toggle-visibility" onclick="togglePasswordVisibility()">👁️</button>
+            <button type="button" onclick="validatePassword()">Valider</button>
+            <p id="password-message"></p>
         </div>
         
         <!-- Troisième ligne : Zone de texte pour la confirmation du mot de passe + bouton Vérifier 2 -->
         <div>
             <label for="conf_password">Confirmer mot de passe :</label>
-            <input type="password" id="conf_password" name="conf_password" required>
-            <button type="button" id="verifier2" onclick="verifier()">Vérifier</button>
+            <input type="password" id="conf_password" placeholder="Mot de passe à confirmer">
+            <button type="button" onclick="validatePasswordConfirmation()">Valider</button>
+            <p id="confirmation-message"></p>
         </div>
         
         <!-- Quatrième ligne : Boutons "Ok" et "Annuler" -->
         <div>
             <button type="submit">Ok</button>
-			<button class="toggle-visibility" onclick="togglePasswordVisibility()">👁️</button>
             <button type="reset">Annuler</button>
-			<button onclick="validatePassword()">Valider</button>
-			<p id="message"></p>
         </div>
     </form>
+    <script src="script.js"></script>
 
-    <script>
-		let isPasswordVisible = false;
-		
-        function verifier() {
-            alert("Mot de passe vérifié !");
-        }
-		
-        function togglePasswordVisibility() {
-            const passwordField = document.getElementById("password");
-            isPasswordVisible = !isPasswordVisible;
-            passwordField.type = isPasswordVisible ? "text" : "password";
-        }
-
-        function validatePassword() {
-            const password = document.getElementById("password").value;
-            const messageElement = document.getElementById("message");
-
-            // Règles pour les lettres et les chiffres
-            const lowercaseRegex = /[a-z]/g;
-            const uppercaseRegex = /[A-Z]/g;
-            const digitsRegex = /[0-9]/g;
-
-            // Trouver les correspondances dans le mot de passe
-            const lowercaseMatches = password.match(lowercaseRegex) || [];
-            const uppercaseMatches = password.match(uppercaseRegex) || [];
-            const digitsMatches = password.match(digitsRegex) || [];
-
-            // Vérifier les conditions
-            const has5UniqueLowercase = lowercaseMatches.length === 5 && new Set(lowercaseMatches).size === 5;
-            const has6UniqueUppercase = uppercaseMatches.length === 6 && new Set(uppercaseMatches).size === 6;
-            const has8UniqueDigits = digitsMatches.length === 8 && new Set(digitsMatches).size === 8;
-
-            // Vérifier si les lettres en minuscules ne sont pas consécutives
-            const areLowercaseNonConsecutive = !lowercaseMatches.some((char, i) => {
-                if (i > 0) {
-                    return char.charCodeAt(0) === lowercaseMatches[i - 1].charCodeAt(0) + 1;
-                }
-                return false;
-            });
-
-            // Valider le mot de passe
-            if (has5UniqueLowercase && areLowercaseNonConsecutive && has6UniqueUppercase && has8UniqueDigits) {
-                messageElement.textContent = "Mot de passe valide !";
-                messageElement.style.color = "green";
-            } else {
-                messageElement.textContent = "Mot de passe invalide. Vérifiez les critères :\n" +
-                    "- 5 lettres minuscules non consécutives\n" +
-                    "- 6 lettres majuscules toutes différentes\n" +
-                    "- 8 chiffres différents";
-                messageElement.style.color = "red";
-            }
-        }
-    </script>
 </body>
 </html>

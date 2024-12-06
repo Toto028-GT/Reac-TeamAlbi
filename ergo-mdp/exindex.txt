@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+</head>
+<body>
+    <form action="#" method="post">
+        <!-- Première ligne : Zone de texte pour l'email -->
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <!-- Deuxième ligne : Zone de texte pour le mot de passe + bouton Vérifier -->
+        
+		 <div class="container">
+        <label for="password">Mot de passe : </label>
+            <input type="password" id="password" placeholder="Mot de passe"></input>
+            <button class="toggle-visibility" onclick="togglePasswordVisibility()">👁️</button>
+        <button onclick="validatePassword()">Valider</button>
+        <p id="message"></p>
+        
+		</div>
+        
+        <!-- Troisième ligne : Zone de texte pour la confirmation du mot de passe + bouton Vérifier 2 -->
+        <div>
+            <label for="conf_password">Confirmer mot de passe :</label>
+            <input type="password" id="conf_password" placeholder="Mot de passe à confirner">
+            <button onclick="validatePassword()">Valider</button>
+			<p id="message"></p>
+        </div>
+        
+        <!-- Quatrième ligne : Boutons "Ok" et "Annuler" -->
+        <div>
+            <button type="submit">Ok</button>
+			
+            <button type="reset">Annuler</button>
+        </div>
+    </form>
+
+    <script>
+		let isPasswordVisible = false;
+		
+        function verifier() {
+            alert("Mot de passe vérifié !")};
+	
+    // Conditions initiales
+    let conditions = {
+        lowercase: { count: 5, consecutive: false },
+        uppercase: { count: 6, unique: true },
+        digits: { count: 5, unique: true }
+    };
+
+    // Compteur de validations réussies
+    let successfulValidations = 0;
+
+    function togglePasswordVisibility() {
+        const passwordField = document.getElementById("password");
+        isPasswordVisible = !isPasswordVisible;
+        passwordField.type = isPasswordVisible ? "text" : "password";
+    }
+
+    function validatePassword() {
+	
+        const password = document.getElementById("password").value;
+        const messageElement = document.getElementById("message");
+
+        // Expressions régulières
+        const lowercaseRegex = /[a-z]/g;
+        const uppercaseRegex = /[A-Z]/g;
+        const digitsRegex = /[0-9]/g;
+
+        // Trouver les correspondances
+        const lowercaseMatches = password.match(lowercaseRegex) || [];
+        const uppercaseMatches = password.match(uppercaseRegex) || [];
+        const digitsMatches = password.match(digitsRegex) || [];
+
+        console.log("Mot de passe :", password);
+        console.log("Correspondances lowercase :", lowercaseMatches);
+        console.log("Correspondances uppercase :", uppercaseMatches);
+        console.log("Correspondances chiffres :", digitsMatches);
+
+        // Vérifier les conditions actuelles
+        const hasEnoughLowercase = lowercaseMatches.length >= conditions.lowercase.count;
+        const hasUniqueLowercase = new Set(lowercaseMatches).size >= conditions.lowercase.count;
+		
+        const hasNonConsecutiveLowercase = conditions.lowercase.consecutive
+            ? true
+            : lowercaseMatches.every((char, i, arr) => {
+                if (i === 0) return true;
+                return char.charCodeAt(0) !== arr[i - 1].charCodeAt(0) + 1;
+            });
+
+        const hasEnoughUppercase = uppercaseMatches.length >= conditions.uppercase.count;
+        const hasUniqueUppercase = conditions.uppercase.unique
+            ? new Set(uppercaseMatches).size >= conditions.uppercase.count
+            : true;
+
+        const hasEnoughDigits = digitsMatches.length >= conditions.digits.count;
+        const hasUniqueDigits = conditions.digits.unique
+            ? new Set(digitsMatches).size >= conditions.digits.count
+            : true;
+
+        console.log("Vérification lowercase : ", hasEnoughLowercase, hasUniqueLowercase, hasNonConsecutiveLowercase);
+        console.log("Vérification uppercase : ", hasEnoughUppercase, hasUniqueUppercase);
+        console.log("Vérification chiffres : ", hasEnoughDigits, hasUniqueDigits);
+
+        // Valider le mot de passe
+        if (
+            hasEnoughLowercase &&
+            hasUniqueLowercase &&
+            hasEnoughUppercase &&
+            hasUniqueUppercase &&
+            hasEnoughDigits &&
+            hasUniqueDigits
+        ) {
+            successfulValidations++;
+
+
+
+
+            if (successfulValidations == 1) {
+                messageElement.textContent = s'il vous plait, Veuillez bien lire les critère de mots de passe !;
+                messageElement.style.color = "red";
+				conditions = {
+                        lowercase: { count: getRandomInt(3, 15), consecutive: false },
+                        uppercase: { count: getRandomInt(3, 15), unique: true },
+                        digits: { count: getRandomInt(3, 10), unique: true }
+                    };
+            }
+			else if (successfulValidations == 2) {
+                messageElement.textContent = ça devient long, veuillez vraiment bien lire les conditions !;
+                messageElement.style.color = "red";
+				conditions = {
+                        lowercase: { count: getRandomInt(5, 10), consecutive: false },
+                        uppercase: { count: getRandomInt(5, 10), unique: true },
+                        digits: { count: getRandomInt(5, 10), unique: true }
+                    };
+  
+            }
+			else if (successfulValidations <= 4) {
+                
+                if (successfulValidations < 4) {
+					messageElement.textContent = s'il vous plait !;
+					messageElement.style.color = "red";
+                    // Modifier les conditions pour les deux premières étapes suivantes
+                    conditions = {
+                        lowercase: { count: getRandomInt(5, 10), consecutive: false },
+                        uppercase: { count: getRandomInt(5, 10), unique: true },
+                        digits: { count: getRandomInt(5, 10), unique: true }
+                    };
+                    console.log("Nouvelles conditions : ", conditions);
+                    updateConditionsDisplay();
+                } else {
+                    // Si les trois validations réussies, arrêter les changements de conditions
+                    messageElement.textContent = " Enfin ! vous pouvez valider avec OK";
+					messageElement.style.color = "green";
+                    document.getElementById("conditions").innerHTML = <strong>Enfin ! vous pouvez valider avec OK</strong>;
+                }
+            }	
+			
+        } else {
+			
+            messageElement.textContent = "Mot de passe invalide. Vérifiez les critères :\n" +
+                     conditions.lowercase.count +" lettres minuscules toutes différentes\n" +
+                    ", " +conditions.uppercase.count+ " lettres majuscules toutes différentes\n" +
+                    ",et " +conditions.digits.count+ " chiffres tous différents";
+            messageElement.style.color = "red";
+        }
+    }
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function updateConditionsDisplay() {
+        const conditionsElement = document.getElementById("conditions");
+        conditionsElement.innerHTML = 
+            Conditions :
+            <ul>
+                <li>${conditions.lowercase.count} lettres minuscules toutes différentes
+        }</li>
+                <li>${conditions.uppercase.count} lettres majuscules toutes différentes
+        }</li>
+                <li>${conditions.digits.count} chiffres tous différents
+        }</li>
+            </ul>
+        ;
+    }
+	</script>
+	</body>
+</html>
