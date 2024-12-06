@@ -31,6 +31,9 @@
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+        #boutonVerif2 {
+            display: none; /* Caché par défaut */
+        }
     </style>
 </head>
 <body>
@@ -49,10 +52,10 @@
         </div>
         
         <!-- Troisième ligne : Zone de texte pour la confirmation du mot de passe + bouton Vérifier 2 -->
-        <div>
+        <div id="boutonVerif2">
             <label for="conf_password">Confirmer mot de passe :</label>
-            <input type="password" id="conf_password" name="conf_password" required>
-            <button type="button" id="verifier2Btn" onclick="updateVerifier()">Vérifier</button>
+            <input type="password" id="conf_password" name="conf_password">
+            <button type="button" id="verifier2Btn" onclick="setVerifierTo2()">Vérifier</button>
         </div>
         
         <!-- Quatrième ligne : Boutons "Ok" et "Annuler" -->
@@ -67,8 +70,11 @@
     <div id="popup">
         <p id="popupMessage"></p>
         <button id="popupYes" style="display:none;" onclick="handleYes()">Oui</button>
+        <button id="popupMaybe" style="display:none;" onclick="handleMaybe()">Peut être</button>
         <button id="popupNo" style="display:none;" onclick="handleNo()">Non</button>
         <button id="popupOk" style="display:none;" onclick="handleOk()">Ok</button>
+        <button id="popupHein" style="display:none;" onclick="handleHein()">Hein?</button>
+        <button id="popupSuivant" style="display:none;" onclick="handleSuivant()">Suivant</button>
     </div>
 
     <script>
@@ -79,39 +85,78 @@
 
         // Fonction pour gérer la validation
         function verifierFunction(event) {
-            if (verifier === 0 || (verifier === 1 && verifier2 === 0)) {
-                event.preventDefault();
-                if (verifier === 0) {
-                    showPopup("Mot de passe invalide. Cliquez sur \"Vérifier\" pour corriger.");
-                } else if (verifier === 1 && verifier2 === 0) {
-                    // Début de la séquence des pop-ups
-                    popupState = 1;
-                    showPopup("Êtes-vous sûr de vouloir vous inscrire ?", true);
-                }
-            } else {
+            event.preventDefault();
+            if (verifier === 0) {
+                showPopup("Mot de passe invalide. Cliquez sur \"Vérifier\" pour corriger.");
+            } else if (verifier === 1 && verifier2 === 0) {
+                // Début de la séquence des pop-ups
+                popupState = 1;
+                showPopup("Êtes-vous sûr de vouloir vous inscrire ?", true, false, false);
+            }
+             else if(verifier === 2) {
+                popupState = 5;
+                showPopup("Êtes-vous un robot ?", true, false, true);
+            }
+            else{
                 showPopup("Formulaire envoyé avec succès !");
             }
         }
 
+        // Fonction pour passer "verifier" à 2
+        function setVerifierTo2() {
+            verifier = 2;
+            console.log("Verifier est maintenant à 2.");
+            // showPopup("Le statut de Vérification est mis à jour : verifier = 2");
+        }
+
         // Afficher la pop-up
-        function showPopup(message, showYesNo = false, showOk = false) {
+        function showPopup(message, showYesNo = false, showOk = false, showYesMaybeNo = false, showHein = false, showSuivant = false) {
             const popup = document.getElementById("popup");
             const overlay = document.getElementById("overlay");
             const popupMessage = document.getElementById("popupMessage");
             const popupYes = document.getElementById("popupYes");
             const popupNo = document.getElementById("popupNo");
             const popupOk = document.getElementById("popupOk");
+            const popupMaybe = document.getElementById("popupMaybe");
+            const popupHein = document.getElementById("popupHein");
+            const popupSuivant = document.getElementById("popupSuivant");
 
+            // Met à jour le message
             popupMessage.innerText = message;
 
-            // Gère les boutons affichés
-            popupYes.style.display = showYesNo ? "inline-block" : "none";
-            popupNo.style.display = showYesNo ? "inline-block" : "none";
-            popupOk.style.display = showOk ? "inline-block" : "none";
+            // Réinitialise l'affichage de tous les boutons
+            popupYes.style.display = "none";
+            popupNo.style.display = "none";
+            popupOk.style.display = "none";
+            popupMaybe.style.display = "none";
+            popupHein.style.display = "none";
+            popupSuivant.style.display = "none";
 
+            // Affiche les boutons demandés
+            if (showYesNo) {
+                popupYes.style.display = "inline-block";
+                popupNo.style.display = "inline-block";
+            }
+            if (showYesMaybeNo) {
+                popupYes.style.display = "inline-block";
+                popupNo.style.display = "inline-block";
+                popupMaybe.style.display = "inline-block";
+            }
+            if (showOk) {
+                popupOk.style.display = "inline-block";
+            }
+            if (showHein) {
+                popupHein.style.display = "inline-block";
+            }
+            if (showSuivant) {
+                popupSuivant.style.display = "inline-block";
+            }
+
+            // Affiche la pop-up et l'overlay
             popup.style.display = "block";
             overlay.style.display = "block";
         }
+
 
         // Fermer la pop-up
         function hidePopup() {
@@ -132,14 +177,26 @@
             } else if (popupState === 3) {
                 // Action de tout recommencer
                 location.reload();
+            } else if (popupState === 5){
+                // Action de tout recommencer
+                window.location.href = "https://youtu.be/xvFZjo5PgG0?si=36zwHB8szJGB1umh";
             }
+        }
+
+        function handleMaybe() {
+            popupState = 5;
+            showPopup("Êtes-vous un robot ?", true, false, true); // Réaffiche la même pop-up
         }
 
         function handleNo() {
             if (popupState === 3) {
                 popupState = 4;
                 showPopup("Veuillez confirmer votre mot de passe.", false, true);
-            } else {
+            } else if(popupState === 5){
+                popupState = 6;
+                showPopup("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", false, false, false, true);
+            }
+            else {
                 hidePopup();
             }
         }
@@ -148,6 +205,7 @@
         function handleOk() {
             if (popupState === 4) {
                 verifier2 = 1; // Met à jour verifier2
+                updateBoutonVerif2(); // Met à jour l'affichage
                 hidePopup();
 
                 // Sélection des boutons
@@ -166,6 +224,23 @@
             }
         }
 
+        function handleHein() {
+            popupState = 8;
+            showPopup("Nous ne pouvons stocker toutes les données que vous nous envoyées. Nous ne pourrons enregistrer vos coordonnées, mais voici le lien vers les informations que souhaitez.", false, false, false, false, true); // Réaffiche la même pop-up
+        }
+
+        function handleSuivant() {
+            window.location.href = "https://youtu.be/xvFZjo5PgG0?si=36zwHB8szJGB1umh";
+        }
+
+        function updateBoutonVerif2() {
+            const boutonVerif2 = document.getElementById("boutonVerif2");
+            if (verifier2 === 1) {
+                boutonVerif2.style.display = "block"; // Visible
+            } else {
+                boutonVerif2.style.display = "none"; // Caché
+            }
+        }
 
         // Attacher l'événement de validation au formulaire
         const form = document.getElementById("myForm");
