@@ -49,7 +49,7 @@ const App = () => {
                 cities={cities}
                 handleCityClick={handleCityClick}
             />
-            
+
             <div style={{
                 position: 'fixed',
                 bottom: 0,
@@ -58,8 +58,10 @@ const App = () => {
                 height: '28vh',
                 display: 'flex',
                 flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                alignItems: 'center',
+                justifyContent: 'center',
+                alignItems: 'flex-end',
+                gap: '50px',
+                marginBottom: '8px'
             }}>
                 {Array(7).fill(null).map((_, index) => (
                     <BlocsMeteo
