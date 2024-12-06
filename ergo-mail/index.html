@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulaire</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <form action="#" method="post">
+      <!-- Première ligne : Zone de texte pour l'email -->
+      <div>
+        <label for="email">Email :</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          onfocus="getClavier()"
+          required
+        />
+
+        <div class="keyboard">
+          <!-- Alphabet cyrillique -->
+          <button type="button" class="key">Й</button>
+          <button type="button" class="key">Ц</button>
+          <button type="button" class="key">У</button>
+          <button type="button" class="key">К</button>
+          <button type="button" class="key">Е</button>
+          <button type="button" class="key">Н</button>
+          <button type="button" class="key">Г</button>
+          <button type="button" class="key">Ш</button>
+          <button type="button" class="key">Щ</button>
+          <button type="button" class="key">З</button>
+          <button type="button" class="key">Х</button>
+          <button type="button" class="key">Ъ</button>
+          <button type="button" class="key">Ф</button>
+          <button type="button" class="key">Ы</button>
+          <button type="button" class="key">В</button>
+          <button type="button" class="key">А</button>
+          <button type="button" class="key">П</button>
+          <button type="button" class="key">Р</button>
+          <button type="button" class="key">О</button>
+          <button type="button" class="key">Л</button>
+          <button type="button" class="key">Д</button>
+          <button type="button" class="key">Ж</button>
+          <button type="button" class="key">Э</button>
+          <button type="button" class="key">Я</button>
+          <button type="button" class="key">Ч</button>
+          <button type="button" class="key">С</button>
+          <button type="button" class="key">М</button>
+          <button type="button" class="key">И</button>
+          <button type="button" class="key">Т</button>
+          <button type="button" class="key">Ь</button>
+          <button type="button" class="key">Б</button>
+          <button type="button" class="key">Ю</button>
+          <button type="button" class="key key-point">.</button>
+          <button type="button" class="key key-at">@</button>
+          <button type="button" class="key key-backspace">←</button>
+          <button type="button" class="key key-enter">Enter</button>
+        </div>
+      </div>
+
+      <div class="qwerty-container" id="qwerty-container">
+      </div>
+
+      <!-- Deuxième ligne : Zone de texte pour le mot de passe + bouton Vérifier -->
+      <div>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required />
+        <button type="button" id="verifier" onclick="verifier()">
+          Vérifier
+        </button>
+      </div>
+
+      <!-- Troisième ligne : Zone de texte pour la confirmation du mot de passe + bouton Vérifier 2 -->
+      <div>
+        <label for="conf_password">Confirmer mot de passe :</label>
+        <input
+          type="password"
+          id="conf_password"
+          name="conf_password"
+          required
+        />
+        <button type="button" id="verifier2" onclick="verifier()">
+          Vérifier
+        </button>
+      </div>
+
+      <!-- Quatrième ligne : Boutons "Ok" et "Annuler" -->
+      <div>
+        <button type="submit">Ok</button>
+        <button type="reset">Annuler</button>
+      </div>
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>

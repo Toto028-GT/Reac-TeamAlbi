@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire</title>
+</head>
+<body>
+    <form action="#" method="post">
+        <!-- Première ligne : Zone de texte pour l'email -->
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <!-- Deuxième ligne : Zone de texte pour le mot de passe + bouton Vérifier -->
+        <div class="container">
+            <label for="password">Mot de passe : </label>
+            <input type="password" id="password" placeholder="Mot de passe">
+            <button type="button" class="toggle-visibility" onclick="togglePasswordVisibility()">👁️</button>
+            <button type="button" onclick="validatePassword()">Valider</button>
+            <p id="password-message"></p>
+        </div>
+        
+        <!-- Troisième ligne : Zone de texte pour la confirmation du mot de passe + bouton Vérifier 2 -->
+        <div>
+            <label for="conf_password">Confirmer mot de passe :</label>
+            <input type="password" id="conf_password" placeholder="Mot de passe à confirmer">
+            <button type="button" onclick="validatePasswordConfirmation()">Valider</button>
+            <p id="confirmation-message"></p>
+        </div>
+        
+        <!-- Quatrième ligne : Boutons "Ok" et "Annuler" -->
+        <div>
+            <button type="submit">Ok</button>
+            <button type="reset">Annuler</button>
+        </div>
+    </form>
+    <script src="script.js"></script>
+
+</body>
+</html>
