@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
-            background-image: url('image/fond.jpg'); /* Image de fond */
+            background-image: url('image/fond.jpg'); /* Image en arrière-plan */
             background-size: cover; /* Pour que l'image couvre toute la surface */
             background-position: center; /* Centrer l'image de fond */
             background-attachment: fixed; /* L'image de fond reste fixe quand on fait défiler la page */
@@ -26,25 +26,50 @@
             background-color: rgba(255, 255, 255, 0.8); /* Fond légèrement transparent pour une meilleure visibilité */
         }
 
-        /* Conteneur pour aligner les éléments sur la même ligne */
+        /* Conteneur principal pour aligner les zones (images à gauche et zones à droite) */
         .elements-container {
             display: flex;
-            justify-content: center;
-            gap: 20px; /* Espacement entre les éléments */
+            justify-content: center; /* Centrer horizontalement */
+            gap: 40px; /* Espacement entre les zones */
         }
 
+        /* Zone gauche : Images à glisser */
+        .drag-zone {
+            display: flex;
+            flex-direction: column; /* Disposition en colonne */
+            align-items: center;
+            gap: 20px; /* Espacement entre les images */
+			
+        }
+
+        /* Zone droite : Zones de dépôt */
+        .drop-zone {
+			position: relative; /* Positionnement absolu */
+            display: flex;
+            flex-direction: column; /* Disposition en colonne */
+            align-items: center;
+            gap: 20px; /* Espacement entre les zones */
+			
+            z-index: 1; /* Cette image sera au-dessus de la première */
+			
+        }
+
+        /* Les zones de dépôt */
         .dropzone {
-            width: 150px;
-            height: 150px;
+            
             margin: 20px;
             display: inline-block;
             align-items: center;
             justify-content: center;
-            position: relative;
+            position: absolute;
             background-size: cover;
             background-position: center;
+            border: 2px dashed #ccc; /* Bordure pour la zone de dépôt */
+			
+			
         }
 
+        /* Les images à glisser */
         .draggable {
             width: 100px;
             height: 100px;
@@ -61,6 +86,55 @@
             margin-top: 20px;
             display: none;
         }
+
+        /* Image en dessous des zones de dépôt */
+        #homme {
+            margin-top: 40px; /* Espacement entre les zones de dépôt et l'image en dessous */
+            width: 400px; /* Taille de l'image */
+            height: auto;
+        }
+		.pardessus {
+            position: absolute; /* Positionnement absolu */
+            z-index: 1; /* Cette image sera au-dessus de la première */
+		}
+		#dropzone1 {
+		width: 75px;
+        height: 75px;
+		top:350px;
+		left:5px;
+		
+		}
+		#dropzone2 {
+		width: 120px;
+        height: 120px;
+		top:-15px;
+		left:118px;
+		
+		}
+		#dropzone3 {
+		width: 75px;
+        height: 75px;
+		top:320px;
+		left:110px;
+		
+		}
+		
+		#dropzone4 {
+		width: 175px;
+        height: 175px;
+		top:150px;
+		left:90px;
+		
+		}
+		#dropzone5 {
+		width: 150px;
+        height: 150px;
+		top:400px;
+		left:100px;
+		
+		}
+       
+		
     </style>
 </head>
 <body>
@@ -68,26 +142,49 @@
         <h2>Êtes-vous un humain ?</h2>
         <p>Glissez chaque image dans sa zone correspondante pour valider automatiquement.</p>
 
-        <!-- Conteneur pour les images et les zones alignées horizontalement -->
+        <!-- Conteneur pour les zones de glisser et de dépôt alignées en ligne -->
+		
         <div class="elements-container">
-            <!-- Drag Elements -->
-            <div class="draggable" id="draggable1" draggable="true">
-                <img src="image/image1.png" alt="Image 1" width="100" height="100">
+            <!-- Zone gauche : Images à glisser -->
+            <div class="drag-zone">
+                <div class="draggable" id="draggable1" draggable="true">
+                    <img src="image/image1.png" alt="Image 1" width="100" height="100">
+                </div>
+                <div class="draggable" id="draggable2" draggable="true">
+                    <img src="image/image2.png" alt="Image 2" width="100" height="100">
+                </div>
+                <div class="draggable" id="draggable3" draggable="true">
+                    <img src="image/image3.png" alt="Image 3" width="100" height="100">
+                </div>
+				<div class="draggable" id="draggable4" draggable="true">
+                    <img src="image/image4.png" alt="Image 4" width="100" height="100">
+                </div>
+				<div class="draggable" id="draggable5" draggable="true">
+                    <img src="image/image5.png" alt="Image 5" width="100" height="100">
+                </div>
             </div>
-            <div class="draggable" id="draggable2" draggable="true">
-                <img src="image/image2.png" alt="Image 2" width="100" height="100">
-            </div>
-            <div class="draggable" id="draggable3" draggable="true">
-                <img src="image/image3.png" alt="Image 3" width="100" height="100">
-            </div>
-        </div>
 
-        <!-- Drop Zones -->
-        <div class="elements-container">
-            <div class="dropzone" id="dropzone1" style="background-image: url('image/zone1.png');"></div>
-            <div class="dropzone" id="dropzone2" style="background-image: url('image/zone2.png');"></div>
-            <div class="dropzone" id="dropzone3" style="background-image: url('image/zone3.png');"></div>
+            <!-- Zone droite : Zones de dépôt -->
+			
+				
+			<div class="drop-zone">
+					
+					
+						<img id="homme" src="image/homme.png" alt="Image en dessous" class="underneath-image">
+						<div class="dropzone" id="dropzone1" style="background-image: url('image/zone1.png');"></div>
+						<div class="dropzone" id="dropzone2" style="background-image: url('image/zone2.png');"></div>
+						<div class="dropzone" id="dropzone3" style="background-image: url('image/zone3.png');"></div>
+						<div class="dropzone" id="dropzone4" style="background-image: url('image/zone4.png');"></div>
+						<div class="dropzone" id="dropzone5" style="background-image: url('image/zone5.png');"></div>
+						
+						
+					
+            </div>
         </div>
+		
+
+        <!-- Image en dessous des zones de dépôt -->
+        
 
         <p id="successMessage" class="success-message">CAPTCHA validé ! Vous pouvez continuer.</p>
     </div>
@@ -96,7 +193,7 @@
         const draggables = document.querySelectorAll('.draggable');
         const dropzones = document.querySelectorAll('.dropzone');
         const successMessage = document.getElementById('successMessage');
-        const dropState = { 1: false, 2: false, 3: false }; // Suivi des états des zones
+        const dropState = { 1: false, 2: false, 3: false ,4: false ,5: false }; // Suivi des états des zones
 
         draggables.forEach((draggable, index) => {
             draggable.addEventListener('dragstart', (event) => {
@@ -128,6 +225,18 @@
                     alert("Mauvaise zone ! Essayez de nouveau.");
                 }
 
+                // Valider automatiquement si toutes les zones sont correctes
+                if (Object.values(dropState).every(state => state)) {
+                    successMessage.style.display = 'block';
+                    setTimeout(() => {
+                        window.location.href = 'page2.html'; // Page protégée
+                    }, 2000);
+                }
+            });
+			dropzone.addEventListener('mouseover', (event) => {
+                
+                dropzone.style.backgroundImage = `url('image/success-zone${index + 1}.png')`;
+                
                 // Valider automatiquement si toutes les zones sont correctes
                 if (Object.values(dropState).every(state => state)) {
                     successMessage.style.display = 'block';
