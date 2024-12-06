@@ -92,11 +92,36 @@ const BlocGlobalGauche = ({ weatherData }) => {
             alignItems: 'center'
         }}>
             <h1>{weatherData?.location.name}, {weatherData?.location.region}, {weatherData?.location.country}</h1>
-            <p>{weatherData?.current.temp_c}</p>
             <img src={`https:${weatherData?.current.condition.icon}`} alt="Icone météo" />
+
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}>
+                <p style={{
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    marginBottom: '8px'
+                }}>Température actuelle</p>
+                <p>{weatherData?.current.temp_c}°C / {weatherData?.current.temp_f}°F</p>
+            </div>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}>
+                <p style={{
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    marginBottom: '8px'
+                }}>Température ressentie</p>
+                <p>{weatherData?.current.feelslike_c}°C / {weatherData?.current.feelslike_f}°F</p>
+            </div>
         </div>
     )
 }
+
 
 BlocGlobalGauche.propTypes = {
     weatherData: PropTypes.object
@@ -172,23 +197,29 @@ const BlocsMeteo = ({ weatherData, index }) => {
             justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
-            paddingTop : '20px',
-            paddingBottom : '20px',
-            paddingLeft : '40px',
-            paddingRight : '40px',
+            paddingTop: '20px',
+            paddingBottom: '20px',
+            paddingLeft: '40px',
+            paddingRight: '40px',
             border: '3px solid #000000',
-            borderRadius: '30px' ,
-            backgroundColor : '#5F80E3'
+            borderRadius: '30px',
+            backgroundColor: '#5F80E3'
         }}>
             <p>JOUR {index + 1}</p>
             <img
                 src={`https:${dayData.day.condition.icon}`}
                 alt={`Condition météo pour jour ${index + 1}`}
+                style={{
+                    transform: 'translateY(-4px)',
+                    transition: 'transform 0.2s ease-in-out'
+                }}
             />
             <p>{dayData.day.avgtemp_c}°C</p>
         </div>
     );
 };
+
+
 
 BlocsMeteo.propTypes = {
     weatherData: PropTypes.object,
