@@ -39,7 +39,6 @@ const App = () => {
     return (
         <div style={{
             padding: '80px',
-            backgroundColor: '#304687',
             display: 'flex',
             flexDirection: 'column',
             zIndex: 0
@@ -50,19 +49,17 @@ const App = () => {
                 cities={cities}
                 handleCityClick={handleCityClick}
             />
-
+            
             <div style={{
                 position: 'fixed',
                 bottom: 0,
                 left: 0,
                 right: 0,
-                height: '39vh',
+                height: '28vh',
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-around',
                 alignItems: 'center',
-                borderTop: '4px solid white',
-                backgroundColor: '#4A67BF'
             }}>
                 {Array(7).fill(null).map((_, index) => (
                     <BlocsMeteo
@@ -172,10 +169,13 @@ const BlocsMeteo = ({ weatherData, index }) => {
             justifyContent: 'center',
             alignItems: 'center',
             textAlign: 'center',
-            padding: '20px',
+            paddingTop : '20px',
+            paddingBottom : '20px',
+            paddingLeft : '40px',
+            paddingRight : '40px',
             border: '3px solid #000000',
-            borderRadius: '30px',
-            backgroundColor: '#4A67BF'
+            borderRadius: '30px' ,
+            backgroundColor : '#7D9BBF'
         }}>
             <p>JOUR {index + 1}</p>
             <img
