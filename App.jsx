@@ -40,7 +40,7 @@ const BlocsMeteoLundi = () =>
       flexDirection : 'column',
       justifyContent: 'center',
       alignItems : 'center',
-      textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
+      textAlign: 'center', padding: '20px', border: '3px solid #000000', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
       <p> LUNDI </p>
       <img src="https://via.placeholder.com/120" alt="Exemple d'image" />
       <p>Voici le second texte du bloc, après l'image.</p>
@@ -56,7 +56,7 @@ const BlocsMeteoMardi = () =>
         flexDirection : 'column',
         justifyContent: 'center',
         alignItems : 'center',
-        textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
+        textAlign: 'center', padding: '20px', border: '3px solid #000000', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
         <p> MARDI </p>
         <img src="https://via.placeholder.com/120" alt="Exemple d'image" />
         <p>Voici le second texte du bloc, après l'image.</p>
@@ -72,7 +72,7 @@ const BlocsMeteoMercredi = () =>
         flexDirection : 'column',
         justifyContent: 'center',
         alignItems : 'center',
-        textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
+        textAlign: 'center', padding: '20px', border: '3px solid #000000', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
         <p> MERCREDI </p>
         <img src="https://via.placeholder.com/120" alt="Exemple d'image" />
         <p>Voici le second texte du bloc, après l'image.</p>
@@ -88,7 +88,7 @@ const BlocsMeteoJeudi = () =>
         flexDirection : 'column',
         justifyContent: 'center',
         alignItems : 'center',
-        textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
+        textAlign: 'center', padding: '20px', border: '3px solid #000000', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
         <p> JEUDI </p>
         <img src="https://via.placeholder.com/120" alt="Exemple d'image" />
         <p>Voici le second texte du bloc, après l'image.</p>
@@ -104,7 +104,7 @@ const BlocsMeteoVendredi = () =>
         flexDirection : 'column',
         justifyContent: 'center',
         alignItems : 'center',
-        textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
+        textAlign: 'center', padding: '20px', border: '3px solid #000000', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
         <p> VENDREDI </p>
         <img src="https://via.placeholder.com/120" alt="Exemple d'image" />
         <p>Voici le second texte du bloc, après l'image.</p>
@@ -120,7 +120,7 @@ const BlocsMeteoSamedi = () =>
         flexDirection : 'column',
         justifyContent: 'center',
         alignItems : 'center',
-        textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
+        textAlign: 'center', padding: '20px', border: '3px solid #000000', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
         <p> SAMEDI </p>
         <img src="https://via.placeholder.com/120" alt="Exemple d'image" />
         <p>Voici le second texte du bloc, après l'image.</p>
@@ -136,7 +136,7 @@ const BlocsMeteoDimanche = () =>
         flexDirection : 'column',
         justifyContent: 'center',
         alignItems : 'center',
-        textAlign: 'center', padding: '20px', border: '3px solid #ccc', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
+        textAlign: 'center', padding: '20px', border: '3px solid #000000', borderRadius: '30px', backgroundColor: '#4A67BF' }}>
         <p> DIMANCHE </p>
         <img src="https://via.placeholder.com/120" alt="Exemple d'image" />
         <p>Voici le second texte du bloc, après l'image.</p>
@@ -158,12 +158,18 @@ const App = () =>
       <BlocPleinEcran />
 
     <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    height: '39vh',
+  }}>
+    <div style={{
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'flex-start',
       gap: '20px',
-      zIndex : 1
+      zIndex: 1,
     }}>
       <BlocsMeteoLundi />
       <BlocsMeteoMardi />
@@ -173,7 +179,8 @@ const App = () =>
       <BlocsMeteoSamedi />
       <BlocsMeteoDimanche />
     </div>
-    </div>
+  </div>
+  </div>
   );
 };
 
