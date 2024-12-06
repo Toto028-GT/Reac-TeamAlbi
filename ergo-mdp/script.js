@@ -57,8 +57,9 @@ function validatePassword() {
                 digits: { count: getRandomInt(5, 10), unique: true }
             };
         } else {
-            messageElement.textContent = "Enfin ! Vous pouvez valider avec OK";
+            messageElement.textContent = "Enfin ! Vous pouvez valider avec Valider";
             messageElement.style.color = "green";
+            // verifier = 1;
         }
     } else {
         messageElement.textContent = "Mot de passe invalide. Vérifiez les critères :\n" +

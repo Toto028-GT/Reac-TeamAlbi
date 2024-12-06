@@ -75,9 +75,6 @@ function getTranslate() {
   return txttrans;
 }
 
-
-
-
 // Attacher des événements aux boutons du clavier virtuel
 document.querySelectorAll(".key").forEach((keyButton) => {
   keyButton.addEventListener("click", () => {
