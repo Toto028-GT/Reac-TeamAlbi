@@ -50,24 +50,27 @@ p {
   background: orange;
   border-radius: 50%;
   animation: swim 10s infinite linear;
+  animation-duration: 10s;
 }
 
 .fish.small {
   width: 30px;
   height: 15px;
+  
 }
 
 .fish.large {
   width: 80px;
   height: 40px;
+  
 }
 
 @keyframes swim {
   from {
-    transform: translateX(-100%);
+    transform: translateX(0%);
   }
   to {
-    transform: translateX(110%);
+    transform: translateX(400%);
   }
 }
 
@@ -110,39 +113,41 @@ p {
     width: 60px;
     height: 30px;
   }
+  
 }
-  animation-duration: 10s;
-}
-
 /* WaveBanner.css */
 .wave-banner {
   position: relative;
   width: 100%;
   height: 100px; /* Ajuste la hauteur selon tes besoins */
   overflow: hidden;
-  background-color: #6075c9; /* Le fond de la bannière */
 }
 
 .wave {
   position: absolute;
   top: 0;
-  width: 200%;
-  height: 100px;
-  background: rgba(255, 255, 255, 0.6);
+  left: 0;
+  width: 400%;
+  height: 150px;
+  background: url('./assets/wave.png') repeat-x;
   animation: wave-animation 10s infinite;
 }
 
 .wave:nth-child(1) {
   animation-delay: 0s;
+  opacity: 20%; 
 }
 
 .wave:nth-child(2) {
   animation-delay: 2s;
+  opacity: 40%; 
 }
 
 .wave:nth-child(3) {
   animation-delay: 4s;
+  opacity: 70%; 
 }
+
 
 @keyframes wave-animation {
   0% {
@@ -152,6 +157,5 @@ p {
     transform: translateX(-50%);
   }
 }
-
 
 

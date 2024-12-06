@@ -29,7 +29,7 @@ function App() {
     const fishes = [];
     for (let i = 0; i < 10; i++) {
       const size = Math.random() > 0.5 ? 'small' : 'large';
-      const top = Math.random() * 100; // Position verticale aléatoire
+      const top = Math.random() * 300; // Position verticale aléatoire
       const left = Math.random() * 100; // Position horizontale de départ
       fishes.push(
         <div
@@ -42,6 +42,7 @@ function App() {
     return fishes;
   };
   return (
+    <body>
     <div
       id="root"
       style={{
@@ -53,6 +54,7 @@ function App() {
       <p>Plus vous descendez, plus il fait sombre...</p>
       
     </div>
+    
     {generateFish()}
     </body>
     
